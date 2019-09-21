@@ -1,0 +1,22 @@
+@import '../../../assets/scss/helpers';
+
+:host {
+  @include host-styles;
+}
+
+.header {
+  @include flex($ai: center);
+
+  height: 60px;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--black-1);
+}
+
+.content {
+  @include host-styles;
+
+  padding: 20px;
+  line-height: 1.5em;
+}

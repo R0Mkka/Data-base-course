@@ -1,0 +1,33 @@
+<div class="toggle" [class.expanded]="isExpanded" (click)="toggle()">
+  <ng-container [ngSwitch]="lab?.status">
+    <mat-icon class="icon">
+      <ng-container *ngSwitchCase="labStatuses.Done">
+        done
+      </ng-container>
+
+      <ng-container *ngSwitchCase="labStatuses.InProgress">
+        timelapse
+      </ng-container>
+
+      <ng-container *ngSwitchCase="labStatuses.ToDo">
+        assignment
+      </ng-container>
+    </mat-icon>
+  </ng-container>
+
+  <span class="label">{{ lab?.label }}</span>
+
+  <mat-icon class="collapse-arrow">keyboard_arrow_down</mat-icon>
+</div>
+
+<div class="content-wrapper" [style.maxHeight.px]="maxHeight">
+  <div class="content">
+    <a
+      class="content-task"
+      *ngFor="let task of lab.tasks"
+      [routerLink]="task?.href"
+    >
+      <span>{{ task?.label }}</span>
+    </a>
+  </div>
+</div>

@@ -20,26 +20,4 @@
 
 .lab-list {
   @include flex(column);
-
-  &__item {
-    @include flex($ai: center);
-
-    cursor: pointer;
-    height: 45px;
-    padding: 0 20px;
-    border-bottom: 1px solid var(--black-1);
-    transition: .2s all ease-in-out;
-
-    &-label {
-      flex-grow: 1;
-    }
-
-    &-icon {
-      flex-shrink: 0;
-    }
-
-    &:hover {
-      background-color: var(--gray-medium);
-    }
-  }
 }

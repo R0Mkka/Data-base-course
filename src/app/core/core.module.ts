@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material';
 
 import { LeftBarComponent } from '../components/left-bar/left-bar.component';
+import { ListItemComponent } from '../components/list-item/list-item.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { LeftBarComponent } from '../components/left-bar/left-bar.component';
     MatIconModule
   ],
   declarations: [
-    LeftBarComponent
+    LeftBarComponent,
+    ListItemComponent
   ],
   exports: [
     LeftBarComponent,

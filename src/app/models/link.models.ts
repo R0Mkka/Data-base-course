@@ -11,4 +11,5 @@ export interface ILink {
 
 export interface ILabLink extends ILink {
   status: LabStatuses;
+  tasks: ILink[];
 }

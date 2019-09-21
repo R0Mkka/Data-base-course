@@ -1,0 +1,64 @@
+@import '../../../assets/scss/helpers';
+
+:host {
+  @include flex(column);
+}
+
+.toggle {
+  @include flex($ai: center);
+
+  cursor: pointer;
+  height: 45px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--black-1);
+  transition: .2s all ease-in-out;
+
+  &.expanded {
+    background-color: var(--gray-medium);
+
+    .collapse-arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    padding-left: 25px;
+    background-color: var(--gray-medium);
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-right: 5px;
+}
+
+.label {
+  flex-grow: 1;
+}
+
+.collapse-arrow {
+  transition: .25s all ease-in-out;
+}
+
+.content-wrapper {
+  max-height: 0px;
+  overflow: hidden;
+  transition: .25s all ease-in-out;
+}
+
+.content {
+  &-task {
+    @include flex($ai: center);
+
+    height: 35px;
+    padding: 0 30px;
+    color: var(--black-1);
+    border-bottom: 1px solid var(--gray);
+    transition: .2s all ease-in-out;
+
+    &:hover {
+      padding-left: 35px;
+      background-color: var(--gray-light);
+    }
+  }
+}

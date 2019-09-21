@@ -1,0 +1,26 @@
+<label class="label" [for]="id">
+  <mat-icon class="label__icon" *ngIf="matIcon">
+    {{ matIcon }}
+  </mat-icon>
+
+  <span class="label__text">{{ label }}</span>
+</label>
+
+<div class="input-wrapper">
+  <input
+    [id]="id"
+    [type]="type"
+    [placeholder]="placeholder"
+    [formControl]="inputFieldControl"
+    class="field"
+    (input)="onChange($event.target.value)"
+  >
+
+  <div
+    *ngIf="isFieldInvalid"
+    [matTooltip]="errorMessage"
+    class="error-notifier"
+  >
+    <mat-icon>error_outline</mat-icon>
+  </div>
+</div>
