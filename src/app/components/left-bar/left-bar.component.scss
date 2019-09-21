@@ -1,0 +1,45 @@
+@import '../../../assets/scss/helpers';
+
+:host {
+  @include flex(column, $fsh: 0);
+
+  position: relative;
+  width: 300px;
+  height: 100vh;
+  border-right: 1px solid var(--black);
+}
+
+.header {
+  @include flex($ai: center);
+
+  height: 60px;
+  padding: 0 20px;
+  color: var(--white);
+  background-color: var(--black-1);
+}
+
+.lab-list {
+  @include flex(column);
+
+  &__item {
+    @include flex($ai: center);
+
+    cursor: pointer;
+    height: 45px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--black-1);
+    transition: .2s all ease-in-out;
+
+    &-label {
+      flex-grow: 1;
+    }
+
+    &-icon {
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background-color: var(--gray-medium);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<header class="header">
+  <span>Лабораторные работы</span>
+</header>
+
+<ul class="lab-list">
+  <li class="lab-list__item" *ngFor="let lab of labLinkList" [routerLink]="lab.href">
+    <span class="lab-list__item-label">{{ lab?.label }}</span>
+
+    <ng-container [ngSwitch]="lab?.status">
+      <mat-icon class="lab-list__item-icon">
+        <ng-container *ngSwitchCase="labStatuses.Done">
+          done
+        </ng-container>
+
+        <ng-container *ngSwitchCase="labStatuses.InProgress">
+          timelapse
+        </ng-container>
+
+        <ng-container *ngSwitchCase="labStatuses.ToDo">
+          assignment
+        </ng-container>
+      </mat-icon>
+    </ng-container>
+  </li>
+</ul>

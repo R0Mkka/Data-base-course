@@ -1,0 +1,57 @@
+@mixin flex($direction: false, $ai: false, $jc: false, $wrap: false, $as: false, $js: false, $fb: false, $fsh: false, $fg: false, $ff: false, $ac: false, $flex: false) {
+  display: flex;
+
+  @if $direction {
+    flex-direction: $direction;
+  }
+
+  @if $ai {
+    align-items: $ai;
+  }
+
+  @if $jc {
+    justify-content: $jc;
+  }
+
+  @if $wrap {
+    flex-wrap: $wrap;
+  }
+
+  @if $as {
+    align-self: $as;
+  }
+
+  @if $js {
+    justify-self: $js;
+  }
+
+  @if $fb {
+    flex-basis: $fb;
+  }
+
+  @if $fsh {
+    flex-shrink: $fsh;
+  }
+
+  @if $fg {
+    flex-grow: $fg;
+  }
+
+  @if $ff {
+    flex-flow: $ff;
+  }
+
+  @if $ac {
+    align-content: $ac;
+  }
+
+  @if $flex {
+    flex: $flex;
+  }
+}
+
+@mixin host-styles {
+  @include flex(column, $fg: 1);
+
+  min-height: 0;
+}

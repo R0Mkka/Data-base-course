@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700|Material+Icons&display=swap&subset=cyrillic');
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import './assets/scss/colors';
+@import './assets/scss/helpers';
+
+@import './assets/css/normalize.css';
+
+body {
+  @include flex(column);
+
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 0;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: .3px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a, button, input, textarea, li {
+  outline: none;
+}

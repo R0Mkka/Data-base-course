@@ -1,0 +1,12 @@
+@import '../assets/scss/helpers';
+
+:host {
+  @include flex();
+}
+
+.content {
+  @include flex(column, $fg: 1);
+
+  min-height: 0;
+  min-width: 0;
+}
