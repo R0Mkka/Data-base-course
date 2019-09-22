@@ -1,0 +1,34 @@
+@import '../../../../../assets/scss/helpers';
+
+:host {
+  @include host-styles;
+}
+
+.workspace {
+  @include flex($jc: center, $ai: center, $fg: 1);
+
+  min-height: 0;
+}
+
+.string-length {
+  width: 300px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: var(--black-1);
+
+  &__header {
+    font-size: 18px;
+    color: var(--white);
+  }
+
+  &__divider {
+    height: 1px;
+    background-color: var(--white);
+    border: none;
+  }
+}
+
+.user-input,
+.count-string-length {
+  margin-bottom: 15px;
+}

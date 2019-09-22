@@ -1,0 +1,40 @@
+<app-page-layout>
+  <ng-container pageHeader>
+    <span>Лабораторная №1 - Задание №6</span>
+  </ng-container>
+
+  <ng-container pageContent>
+    <div class="workspace">
+      <div class="string-length">
+        <div class="string-length__header">
+          <span>Расчет длины строки</span>
+        </div>
+
+        <hr class="string-length__divider">
+
+        <app-input-field
+          class="user-input"
+          id="user-number"
+          type="text"
+          label="Строка"
+          placeholder="Введите строку"
+          [formControl]="userInputControl"
+        >
+        </app-input-field>
+
+        <button class="primary-button black count-string-length" (click)="countStringLength()">Вычислить</button>
+
+        <app-input-field
+          class="result-field"
+          id="result-field"
+          type="text"
+          label="Длина строки"
+          [readonly]="true"
+          placeholder=""
+          [formControl]="resultControl"
+        >
+        </app-input-field>
+      </div>
+    </div>
+  </ng-container>
+</app-page-layout>
