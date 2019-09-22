@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ILabLink, LabStatuses } from '@models/link.models';
 
@@ -14,17 +15,35 @@ export class ListItemComponent {
 
   public readonly labStatuses = LabStatuses;
 
-  public isExpanded = false;
+  public isActive = false;
 
-  public toggle(): void {
-    this.isExpanded = !this.isExpanded;
+  constructor(
+    private readonly router: Router
+  ) { }
+
+  public handleClick(): void {
+    if (this.lab.tasks.length === 0) {
+      this.goToLab();
+
+      return;
+    }
+
+    this.toggle();
   }
 
   public get maxHeight(): number {
-    if (!this.isExpanded) {
+    if (!this.isActive) {
       return 0;
     }
 
     return this.lab.tasks.length * 35;
+  }
+
+  private toggle(): void {
+    this.isActive = !this.isActive;
+  }
+
+  private goToLab(): void {
+    this.router.navigate([this.lab.href]);
   }
 }

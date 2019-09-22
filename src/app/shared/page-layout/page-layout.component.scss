@@ -5,7 +5,7 @@
 }
 
 .header {
-  @include flex($ai: center);
+  @include flex($ai: center, $fsh: 0);
 
   height: 60px;
   padding: 0 20px;

@@ -40,3 +40,10 @@ a {
 mat-icon::selection {
   background-color: transparent;
 }
+
+button[disabled] {
+  pointer-events: none;
+  color: var(--gray) !important;
+  background-color: var(--gray-medium) !important;
+  border: 2px solid var(--gray-medium) !important;
+}

@@ -1,0 +1,96 @@
+<app-page-layout>
+  <ng-container pageHeader>
+    <span>Лабораторная №3</span>
+  </ng-container>
+
+  <ng-container pageContent>
+    <div class="workspace">
+      <div class="users-panel">
+        <div class="user-list">
+          <div class="row row-header">
+            <div class="cell full-name">
+              <span>Полное имя</span>
+            </div>
+
+            <div class="cell role">
+              <span>Роль</span>
+            </div>
+
+            <div class="cell educational-institution">
+              <span>Учреждение образования</span>
+            </div>
+
+            <div class="cell email">
+              <span>Email</span>
+            </div>
+          </div>
+
+          <div class="error" *ngIf="errorMessage">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorMessage }}</span>
+          </div>
+
+          <div class="empty-list" *ngIf="(usersStream | async).length === 0 && !errorMessage">
+            <mat-icon>warning</mat-icon>
+            <span>Список пуст.</span>
+          </div>
+
+          <div
+            class="row row-ordinary"
+            [class.selected]="selectedRowIndex === index"
+            *ngFor="let user of (usersStream | async); let index = index"
+            (click)="selectRow(index)"
+          >
+            <div class="cell cell-ordinary full-name">
+              <span>{{ getFullName(user) }}</span>
+            </div>
+
+            <div class="cell cell-ordinary role">
+              <span>{{ user?.role }}</span>
+            </div>
+
+            <div class="cell cell-ordinary educational-institution">
+              <span>{{ user?.educationalInstitution }}</span>
+            </div>
+
+            <div class="cell cell-ordinary email">
+              <span>{{ user?.email }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button
+            class="actions__item primary-button white"
+            (click)="openUserAddingDialog()"
+          >
+            Добавить
+          </button>
+
+          <button
+            class="actions__item primary-button white"
+            (click)="openClearingListDialog()"
+          >
+            Очистить список
+          </button>
+
+          <button
+            class="actions__item primary-button white"
+            [disabled]="selectedRowIndex === null"
+            (click)="openUserEditingDialog()"
+          >
+            Отредактировать
+          </button>
+
+          <button
+            class="actions__item primary-button white"
+            [disabled]="selectedRowIndex === null"
+            (click)="openUserRemovingDialog()"
+          >
+            Удалить
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</app-page-layout>

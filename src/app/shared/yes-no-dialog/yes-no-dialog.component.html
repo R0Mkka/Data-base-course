@@ -1,0 +1,16 @@
+<div class="header">
+  <div class="header__title">
+    <mat-icon class="header__title-icon">help_outline</mat-icon>
+    <span class="header__title-text">Сообщение</span>
+  </div>
+  <mat-icon class="header__close-button" (click)="closeDialog()">close</mat-icon>
+</div>
+
+<div class="content">
+  <span>{{ data?.message }}</span>
+</div>
+
+<div class="actions">
+  <button class="actions__item" (click)="onYes()">Да</button>
+  <button class="actions__item" (click)="closeDialog()">Отмена</button>
+</div>

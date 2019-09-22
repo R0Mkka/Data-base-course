@@ -1,6 +1,10 @@
-<div class="toggle" [class.expanded]="isExpanded" (click)="toggle()">
+<div class="toggle" [class.active]="isActive" (click)="handleClick()">
   <ng-container [ngSwitch]="lab?.status">
     <mat-icon class="icon">
+      <ng-container *ngSwitchCase="labStatuses.Checked">
+        done_all
+      </ng-container>
+
       <ng-container *ngSwitchCase="labStatuses.Done">
         done
       </ng-container>
@@ -17,7 +21,7 @@
 
   <span class="label">{{ lab?.label }}</span>
 
-  <mat-icon class="collapse-arrow">keyboard_arrow_down</mat-icon>
+  <mat-icon *ngIf="lab.tasks.length > 0" class="collapse-arrow">keyboard_arrow_down</mat-icon>
 </div>
 
 <div class="content-wrapper" [style.maxHeight.px]="maxHeight">

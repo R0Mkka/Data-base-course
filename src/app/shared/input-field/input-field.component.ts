@@ -19,6 +19,7 @@ export class InputFieldComponent implements ControlValueAccessor {
   @Input() public type: string;
   @Input() public label: string;
   @Input() public matIcon: string;
+  @Input() public labelColor = 'white';
   @Input() public validators: ValidatorFn[];
   @Input() public placeholder = 'Введите здесь';
 

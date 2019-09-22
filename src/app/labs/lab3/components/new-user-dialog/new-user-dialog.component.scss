@@ -1,0 +1,66 @@
+@import '../../../../../assets/scss/helpers';
+
+::ng-deep {
+  mat-dialog-container {
+    padding: 0 !important;
+  }
+}
+
+:host {
+  @include flex(column);
+}
+
+.header {
+  @include flex($ai: center, $fsh: 0);
+
+  height: 60px;
+  padding: 0 20px;
+  font-size: 20px;
+  color: var(--white);
+  background-color: var(--black-1);
+
+  &__title {
+    flex-grow: 1;;
+  }
+
+  &__close-button {
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.new-user-form {
+  &__field {
+    margin-bottom: 15px;
+  }
+}
+
+.actions {
+  @include flex($jc: flex-end, $ai: center, $fsh: 0);
+
+  height: 60px;
+  padding: 0 20px;
+  border-top: 1px solid var(--black-1);
+
+  &__item {
+    cursor: pointer;
+    width: 120px;
+    height: 30px;
+    margin-left: 10px;
+    color: var(--white);
+    background-color: var(--black-1);
+    border: 2px solid var(--black-1);
+    border-radius: 3px;
+    transition: .25s all ease-in-out;
+
+    &:hover {
+      color: var(--black-1);
+      background-color: var(--white);
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div class="header">
+  <span class="header__title">Редатирование пользователя</span>
+  <mat-icon class="header__close-button" (click)="closeDialog()">close</mat-icon>
+</div>
+
+<div class="content">
+  <div class="new-user-form" [formGroup]="newUserForm">
+    <ng-container *ngFor="let field of newUserFormConfig">
+      <app-input-field
+        class="new-user-form__field"
+        *ngIf="field.control.type === controlTypes.Input"
+        labelColor="#1a1a1a"
+        [id]="field.id"
+        [type]="field.type"
+        [label]="field.label"
+        [validators]="field.control.validators"
+        [placeholder]="field.placeholder"
+        [formControlName]="field.control.name"
+      >
+      </app-input-field>
+
+      <app-custom-select-field
+        class="new-user-form__field"
+        *ngIf="field.control.type === controlTypes.Select"
+        labelColor="#1a1a1a"
+        [id]="field.id"
+        [values]="field.control.values"
+        [label]="field.label"
+        [placeholder]="field.placeholder"
+        [formControlName]="field.control.name"
+      >
+      </app-custom-select-field>
+    </ng-container>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="actions__item" [disabled]="newUserForm.invalid" (click)="editUser()">Сохранить</button>
+  <button class="actions__item" (click)="closeDialog()">Отмена</button>
+</div>

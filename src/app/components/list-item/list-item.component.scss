@@ -13,7 +13,7 @@
   border-bottom: 1px solid var(--black-1);
   transition: .2s all ease-in-out;
 
-  &.expanded {
+  &.active {
     background-color: var(--gray-medium);
 
     .collapse-arrow {

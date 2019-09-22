@@ -1,4 +1,5 @@
 export enum LabStatuses {
+  Checked = 'Checked',
   Done = 'Done',
   InProgress = 'InProgress',
   ToDo = 'ToDo'
