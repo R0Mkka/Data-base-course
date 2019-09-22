@@ -5,35 +5,116 @@
 
   <ng-container pageContent>
     <div class="workspace">
-      <div class="sum-counter">
-        <div class="sum-counter__header">
-          <span>Расчет суммы</span>
+      <div class="calculator">
+        <div class="calculator__header">
+          <span>Калькулятор</span>
         </div>
 
-        <hr class="sum-counter__divider">
+        <hr class="calculator__divider">
 
-        <app-input-field
-          class="user-number"
-          id="user-number"
-          type="number"
-          label="Ваше число"
-          placeholder="Введите число"
-          [formControl]="userNumberControl"
-        >
-        </app-input-field>
+        <div class="calculator__field">
+          <app-input-field
+            class="user-input"
+            id="user-number"
+            type="text"
+            placeholder=""
+            [readonly]="true"
+            [formControl]="currentValueControl"
+          >
+          </app-input-field>
+        </div>
 
-        <button class="primary-button black count-result-button" (click)="countResult()">Вычислить</button>
+        <div class="calculator__actions-panel">
+          <div class="button-row">
+            <button class="action clear-last" (click)="clearLast()">
+              <span>CE</span>
+            </button>
 
-        <app-input-field
-          class="result-field"
-          id="result-field"
-          type="text"
-          label="Сумма"
-          [readonly]="true"
-          placeholder=""
-          [formControl]="resultControl"
-        >
-        </app-input-field>
+            <button class="action clear-all" (click)="clearValue()">
+              <span>C</span>
+            </button>
+
+            <button class="action backspace" (click)="backspace()">
+              <mat-icon>backspace</mat-icon>
+            </button>
+
+            <button class="action divide" (click)="chooseOperation(operations.Divide)">
+              <span>/</span>
+            </button>
+          </div>
+
+          <div class="button-row">
+            <button class="action number" (click)="pushNumber(7)">
+              <span>7</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(8)">
+              <span>8</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(9)">
+              <span>9</span>
+            </button>
+
+            <button class="action multiply" (click)="chooseOperation(operations.Multiply)">
+              <span>*</span>
+            </button>
+          </div>
+
+          <div class="button-row">
+            <button class="action number" (click)="pushNumber(4)">
+              <span>4</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(5)">
+              <span>5</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(6)">
+              <span>6</span>
+            </button>
+
+            <button class="action minus" (click)="chooseOperation(operations.Minus)">
+              <span>-</span>
+            </button>
+          </div>
+
+          <div class="button-row">
+            <button class="action number" (click)="pushNumber(1)">
+              <span>1</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(2)">
+              <span>2</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(3)">
+              <span>3</span>
+            </button>
+
+            <button class="action plus" (click)="chooseOperation(operations.Plus)">
+              <span>+</span>
+            </button>
+          </div>
+
+          <div class="button-row">
+            <button class="action sign" (click)="toggleSign()">
+              <span>+ / -</span>
+            </button>
+
+            <button class="action number" (click)="pushNumber(0)">
+              <span>0</span>
+            </button>
+
+            <button class="action dot" (click)="pushDot()">
+              <span>.</span>
+            </button>
+
+            <button class="action equal" (click)="countResult()">
+              <span>=</span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>

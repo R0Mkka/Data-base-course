@@ -10,8 +10,7 @@
   min-height: 0;
 }
 
-.sum-counter{
-  width: 300px;
+.calculator {
   padding: 15px;
   border-radius: 5px;
   background-color: var(--black-1);
@@ -26,9 +25,34 @@
     background-color: var(--white);
     border: none;
   }
-}
 
-.user-number,
-.count-result-button {
-  margin-bottom: 15px;
+  &__actions-panel {
+    @include flex(column);
+
+    margin-top: 15px;
+
+    .button-row {
+      @include flex();
+
+      .action {
+        @include flex($jc: center, $ai: center);
+
+        cursor: pointer;
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+        background-color: var(--gray-light);
+        border: 1px solid var(--black-1);
+        transition: .25s all ease-in-out;
+
+        &.number {
+          background-color: var(--white);
+        }
+
+        &:hover {
+          background-color: var(--gray-medium);
+        }
+      }
+    }
+  }
 }

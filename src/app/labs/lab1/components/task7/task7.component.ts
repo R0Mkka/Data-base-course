@@ -1,6 +1,19 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { FormControl, FormBuilder } from '@angular/forms';
 
+enum States {
+  Number = 'number',
+  Operation = 'operation',
+  AfterEqual = 'afterEqual'
+}
+
+enum Operations {
+  Divide = '/',
+  Multiply = '*',
+  Plus = '+',
+  Minus = '-'
+}
+
 @Component({
   selector: 'app-task7',
   templateUrl: './task7.component.html',
@@ -8,45 +21,297 @@ import { FormControl, FormBuilder } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Task7Component implements OnInit {
-  public userNumberControl: FormControl;
-  public resultControl: FormControl;
+  public currentState = States.Number;
+  public states = States;
+  public currentValue = '';
+  public currentOperation: Operations = null;
+  public operations = Operations;
+  public firstNumberStr = '';
+  public secondNumberStr = '';
+  public currentValueControl: FormControl;
 
   constructor(
     private readonly formBuilder: FormBuilder
   ) { }
 
   public ngOnInit(): void {
-    this.initForms();
+    this.initForm();
+  }
+
+  public clearValue(): void {
+    this.currentValue = '';
+    this.firstNumberStr = '';
+    this.secondNumberStr = '';
+    this.currentOperation = null;
+    this.currentState = this.states.Number;
+
+    this.updateValue();
+  }
+
+  public clearLast(): void {
+    if (this.currentState === this.states.Number || this.currentState === this.states.AfterEqual) {
+      this.clearValue();
+
+      return;
+    }
+
+    if (this.currentState === this.states.Operation && this.secondNumberStr.length === 0) {
+      this.currentValue = `${this.firstNumberStr}`;
+      this.currentOperation = null;
+      this.currentState = this.states.Number;
+    }
+
+    if (this.currentState === this.states.Operation && this.secondNumberStr.length > 0) {
+      this.currentValue = `${this.firstNumberStr} ${this.currentOperation} `;
+      this.secondNumberStr = '';
+    }
+
+    this.updateValue();
+  }
+
+  public backspace(): void {
+    if (this.currentState === this.states.AfterEqual) {
+      if (!parseFloat(this.currentValue)) {
+        this.clearValue();
+
+        return;
+      }
+
+      this.secondNumberStr = '';
+      this.currentState = this.states.Number;
+      this.currentOperation = null;
+      this.currentValue = this.currentValue.slice(0, this.currentValue.length - 1);
+      this.firstNumberStr = this.currentValue;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.currentState === this.states.Number) {
+      this.currentValue = this.currentValue.length > 0
+        ? this.currentValue.slice(0, this.currentValue.length - 1)
+        : '';
+
+      this.firstNumberStr = this.currentValue;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.secondNumberStr.length > 0) {
+      this.currentValue = this.currentValue.slice(0, this.currentValue.length - 1);
+      this.secondNumberStr = this.secondNumberStr.slice(0, this.secondNumberStr.length - 1);
+    } else {
+      this.currentValue = this.currentValue.slice(0, this.currentValue.length - 3);
+      this.currentState = this.states.Number;
+    }
+
+    this.updateValue();
+  }
+
+  public pushNumber(value: number): void {
+    if (this.currentState === this.states.AfterEqual) {
+      this.clearValue();
+
+      this.currentState = this.states.Number;
+    }
+
+    if (this.currentState === this.states.Number) {
+      this.firstNumberStr += value.toString();
+    } else {
+      this.secondNumberStr += value.toString();
+    }
+
+    this.currentValue = `${this.currentValue}${value}`;
+
+    this.updateValue();
+  }
+
+  public chooseOperation(operation: Operations): void {
+    if (this.currentState === this.states.AfterEqual) {
+      if (!parseFloat(this.currentValue)) {
+        this.clearValue();
+
+        return;
+      }
+
+      this.firstNumberStr = this.currentValue;
+      this.secondNumberStr = '';
+      this.currentState = this.states.Operation;
+      this.currentOperation = operation;
+      this.currentValue = `${this.firstNumberStr} ${operation} `;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.firstNumberStr.length === 0) {
+      return;
+    }
+
+    if (this.currentState === this.states.Number) {
+      this.currentValue = `${this.currentValue} ${operation} `;
+      this.currentOperation = operation;
+      this.currentState = this.states.Operation;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.currentState === this.states.Operation) {
+      this.currentValue = `${this.firstNumberStr} ${operation} `;
+      this.currentOperation = operation;
+      this.secondNumberStr = '';
+
+      this.updateValue();
+    }
+  }
+
+  public toggleSign(): void {
+    if (this.currentState === this.states.AfterEqual) {
+      if (!parseFloat(this.currentValue)) {
+        this.clearValue();
+
+        return;
+      }
+
+      this.firstNumberStr = (Number(this.currentValue) * -1).toString();
+      this.secondNumberStr = '';
+      this.currentState = this.states.Number;
+      this.currentOperation = null;
+      this.currentValue = `${this.firstNumberStr}`;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.currentState === this.states.Number && this.firstNumberStr.length > 0) {
+      this.firstNumberStr = (Number(this.firstNumberStr) * -1).toString();
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Operation && this.secondNumberStr.length > 0) {
+      this.secondNumberStr = (Number(this.secondNumberStr) * -1).toString();
+      this.currentValue = `${this.firstNumberStr} ${this.currentOperation} ${this.secondNumberStr}`;
+
+      this.updateValue();
+    }
+  }
+
+  public pushDot(): void {
+    if (this.currentState === this.states.AfterEqual) {
+      if (!parseFloat(this.currentValue)) {
+        this.clearValue();
+
+        return;
+      }
+
+      this.secondNumberStr = '';
+      this.currentState = this.states.Number;
+      this.currentOperation = null;
+      this.firstNumberStr = this.currentValue.includes('.')
+        ? this.currentValue
+        : `${this.currentValue}.`;
+
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.currentState === this.states.Number) {
+      this.firstNumberStr = this.firstNumberStr.length > 0 && !this.firstNumberStr.includes('.')
+        ? `${this.firstNumberStr}.`
+        : this.firstNumberStr;
+
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+
+      return;
+    }
+
+    if (this.currentState === this.states.Operation) {
+      this.secondNumberStr = this.secondNumberStr.length > 0 && !this.secondNumberStr.includes('.')
+        ? `${this.secondNumberStr}.`
+        : this.secondNumberStr;
+
+      this.currentValue = `${this.firstNumberStr} ${this.currentOperation} ${this.secondNumberStr}`;
+
+      this.updateValue();
+    }
   }
 
   public countResult(): void {
-    const { value } = this.userNumberControl;
-
-    if (value.length === 0) {
-      this.resultControl.setValue('Вы не ввели число.');
-
+    if (this.currentState === this.states.AfterEqual
+        || this.currentState === this.states.Number
+        || this.secondNumberStr.length === 0) {
       return;
     }
 
-    const userNumber = parseInt(value, 10);
+    const firstNumber = parseFloat(this.firstNumberStr);
+    const secondNumber = parseFloat(this.secondNumberStr);
+    let result = null;
 
-    if (userNumber < 1 || userNumber > 1000000) {
-      this.resultControl.setValue('Диапазон числа [1, 1000000].');
+    switch (this.currentOperation) {
+      case this.operations.Divide:
+        if (secondNumber === 0) {
+          this.currentValue = 'Операция невозможна.';
+          this.firstNumberStr = '';
+          this.secondNumberStr = '';
+          this.currentOperation = null;
+          this.currentState = this.states.AfterEqual;
 
-      return;
+          this.updateValue();
+          return;
+        }
+
+        result = firstNumber / secondNumber;
+        break;
+      case this.operations.Multiply:
+        result = firstNumber * secondNumber;
+        break;
+      case this.operations.Plus:
+        result = firstNumber + secondNumber;
+        break;
+      case this.operations.Minus:
+        result = firstNumber - secondNumber;
+        break;
+      default:
+        break;
     }
 
-    let sum = 0;
-
-    for (let i = 1; i <= userNumber; i++) {
-      sum += i;
+    if (Number(result) > 999999999 || Number(result) < -999999999) {
+      this.currentValue = 'Ошибка.';
+    } else {
+      if (Math.abs(parseInt(result, 10)) < Math.abs(parseFloat(result))) {
+        this.currentValue = `${Number(result.toFixed(8))}`;
+      } else {
+        this.currentValue = `${result}`;
+      }
     }
 
-    this.resultControl.setValue(sum);
+    this.firstNumberStr = '';
+    this.secondNumberStr = '';
+    this.currentOperation = null;
+    this.currentState = this.states.AfterEqual;
+
+    this.updateValue();
   }
 
-  private initForms(): void {
-    this.userNumberControl = this.formBuilder.control('');
-    this.resultControl = this.formBuilder.control('');
+  private initForm(): void {
+    this.currentValueControl = this.formBuilder.control('');
+  }
+
+  private updateValue(): void {
+    this.currentValueControl.setValue(this.currentValue);
   }
 }
