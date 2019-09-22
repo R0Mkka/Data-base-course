@@ -48,7 +48,7 @@ export class Task2Component implements OnInit {
     const width = this.parallelepipedVolumeForm.get('width').value;
     const height = this.parallelepipedVolumeForm.get('height').value;
 
-    resultControl.setValue(`${(length * width * height).toString()} см2`);
+    resultControl.setValue(`${(length * width * height).toString()} см3`);
   }
 
   private initForms(): void {

@@ -16,7 +16,7 @@ const labs: Lab[] = [
   {
     index: 1,
     tasks: [
-      ...getTasks(1, [1, 2, 3, 4])
+      ...getTasks(1, [1, 2, 3, 4, 5, 6, 7])
     ],
     status: LabStatuses.InProgress
   },
