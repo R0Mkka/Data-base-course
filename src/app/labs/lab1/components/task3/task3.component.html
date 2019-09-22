@@ -1,1 +1,40 @@
-Лабораторная №1
+<app-page-layout>
+  <ng-container pageHeader>
+    <span>Лабораторная №1 - Задание №3</span>
+  </ng-container>
+
+  <ng-container pageContent>
+    <div class="workspace">
+      <div class="sum-counter">
+        <div class="sum-counter__header">
+          <span>Расчет суммы</span>
+        </div>
+
+        <hr class="sum-counter__divider">
+
+        <app-input-field
+          class="user-number"
+          id="user-number"
+          type="number"
+          label="Ваше число"
+          placeholder="Введите число"
+          [formControl]="userNumberControl"
+        >
+        </app-input-field>
+
+        <button class="primary-button black count-result-button" (click)="countResult()">Вычислить</button>
+
+        <app-input-field
+          class="result-field"
+          id="result-field"
+          type="text"
+          label="Сумма"
+          [readonly]="true"
+          placeholder=""
+          [formControl]="resultControl"
+        >
+        </app-input-field>
+      </div>
+    </div>
+  </ng-container>
+</app-page-layout>

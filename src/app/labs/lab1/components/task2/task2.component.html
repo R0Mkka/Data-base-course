@@ -1,91 +1,91 @@
 <app-page-layout>
-    <ng-container pageHeader>
-      <span>Лабораторная №1 - Задание №2</span>
-    </ng-container>
+  <ng-container pageHeader>
+    <span>Лабораторная №1 - Задание №2</span>
+  </ng-container>
 
-    <ng-container pageContent>
-      <div class="workspace">
-        <div class="guessing-game">
-          <div class="guessing-game__header">
-            <span>Угадайка</span>
-          </div>
-
-          <hr class="guessing-game__divider">
-
-          <app-input-field
-            class="user-number"
-            id="user-number"
-            type="number"
-            label="Ваше число"
-            placeholder="Введите число"
-            [formControl]="userNumberControl"
-          >
-          </app-input-field>
-
-          <button class="primary-button black show-result-button" (click)="showResult()">Ответ</button>
-
-          <app-input-field
-            class="result-field"
-            id="result-field"
-            type="text"
-            label="Результат"
-            [readonly]="true"
-            placeholder=""
-            [formControl]="resultControl"
-          >
-          </app-input-field>
+  <ng-container pageContent>
+    <div class="workspace">
+      <div class="guessing-game">
+        <div class="guessing-game__header">
+          <span>Угадайка</span>
         </div>
 
-        <div class="parallelepiped-volume" [formGroup]="parallelepipedVolumeForm">
-          <div class="parallelepiped-volume__header">
-            <span>Объем параллелепипеда</span>
-          </div>
+        <hr class="guessing-game__divider">
 
-          <hr class="parallelepiped-volume__divider">
+        <app-input-field
+          class="user-number"
+          id="user-number"
+          type="number"
+          label="Ваше число"
+          placeholder="Введите число"
+          [formControl]="userNumberControl"
+        >
+        </app-input-field>
 
-          <app-input-field
-            class="user-input"
-            id="length"
-            type="number"
-            label="Длина (см)"
-            placeholder="Введите длину"
-            formControlName="length"
-          >
-          </app-input-field>
+        <button class="primary-button black show-result-button" (click)="showResult()">Ответ</button>
 
-          <app-input-field
-            class="user-input"
-            id="width"
-            type="number"
-            label="Ширина (см)"
-            placeholder="Введите ширину"
-            formControlName="width"
-          >
-          </app-input-field>
-
-          <app-input-field
-            class="user-input"
-            id="height"
-            type="number"
-            label="Высота (см)"
-            placeholder="Введите высоту"
-            formControlName="height"
-          >
-          </app-input-field>
-
-          <button class="primary-button black show-parallelepiped-volume" (click)="showParallelepipedVolume()">Ответ</button>
-
-          <app-input-field
-            class="result-field"
-            id="result-field"
-            type="text"
-            label="Объем"
-            [readonly]="true"
-            placeholder=""
-            formControlName="result"
-          >
-          </app-input-field>
-        </div>
+        <app-input-field
+          class="result-field"
+          id="result-field"
+          type="text"
+          label="Результат"
+          [readonly]="true"
+          placeholder=""
+          [formControl]="resultControl"
+        >
+        </app-input-field>
       </div>
-    </ng-container>
-  </app-page-layout>
+
+      <div class="parallelepiped-volume" [formGroup]="parallelepipedVolumeForm">
+        <div class="parallelepiped-volume__header">
+          <span>Объем параллелепипеда</span>
+        </div>
+
+        <hr class="parallelepiped-volume__divider">
+
+        <app-input-field
+          class="user-input"
+          id="length"
+          type="number"
+          label="Длина (см)"
+          placeholder="Введите длину"
+          formControlName="length"
+        >
+        </app-input-field>
+
+        <app-input-field
+          class="user-input"
+          id="width"
+          type="number"
+          label="Ширина (см)"
+          placeholder="Введите ширину"
+          formControlName="width"
+        >
+        </app-input-field>
+
+        <app-input-field
+          class="user-input"
+          id="height"
+          type="number"
+          label="Высота (см)"
+          placeholder="Введите высоту"
+          formControlName="height"
+        >
+        </app-input-field>
+
+        <button class="primary-button black show-parallelepiped-volume" (click)="showParallelepipedVolume()">Ответ</button>
+
+        <app-input-field
+          class="result-field"
+          id="result-field"
+          type="text"
+          label="Объем"
+          [readonly]="true"
+          placeholder=""
+          formControlName="result"
+        >
+        </app-input-field>
+      </div>
+    </div>
+  </ng-container>
+</app-page-layout>
