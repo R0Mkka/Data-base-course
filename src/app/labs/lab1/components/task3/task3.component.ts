@@ -20,7 +20,15 @@ export class Task3Component implements OnInit {
   }
 
   public countResult(): void {
-    const userNumber = parseInt(this.userNumberControl.value, 10);
+    const { value } = this.userNumberControl;
+
+    if (value.length === 0) {
+      this.resultControl.setValue('Вы не ввели число.');
+
+      return;
+    }
+
+    const userNumber = parseInt(value, 10);
 
     if (userNumber < 1 || userNumber > 1000000) {
       this.resultControl.setValue('Диапазон числа [1, 1000000].');
