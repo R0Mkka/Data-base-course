@@ -26,7 +26,7 @@ export class Task4Component implements OnInit {
       return;
     }
 
-    const userNumber = parseInt(value, 10);
+    const userNumber = parseFloat(value);
     let result = null;
 
     switch (mode) {

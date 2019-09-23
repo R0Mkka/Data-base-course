@@ -30,6 +30,12 @@ export class Task5Component implements OnInit {
     const length = this.rectangleAreaForm.get('length').value;
     const width = this.rectangleAreaForm.get('width').value;
 
+    if (length < 0 || width < 0) {
+      resultControl.setValue('Все числа должны быть >= 0.');
+
+      return;
+    }
+
     resultControl.setValue(`${(length * width).toString()} см2`);
   }
 

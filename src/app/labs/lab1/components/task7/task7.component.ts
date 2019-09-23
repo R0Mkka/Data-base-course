@@ -21,6 +21,7 @@ enum Operations {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Task7Component implements OnInit {
+  public memory = null;
   public currentState = States.Number;
   public states = States;
   public currentValue = '';
@@ -109,6 +110,117 @@ export class Task7Component implements OnInit {
     }
 
     this.updateValue();
+  }
+
+  public memoryRemember(): void {
+    if (!this.memory) {
+      return;
+    }
+
+    if (this.currentState === this.states.AfterEqual) {
+      this.currentValue = this.memory;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Number) {
+      this.firstNumberStr = this.memory;
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Operation) {
+      this.secondNumberStr = this.memory;
+      this.currentValue = `${this.firstNumberStr} ${this.currentOperation} ${this.secondNumberStr}`;
+
+      this.updateValue();
+    }
+  }
+
+  public memoryAdd(): void {
+    if (this.currentState === this.states.AfterEqual) {
+      this.memory = this.currentValue;
+    }
+
+    if (this.currentState === this.states.Number) {
+      this.memory = this.firstNumberStr;
+    }
+
+    if (this.currentState === this.states.Operation) {
+      this.memory = this.secondNumberStr;
+    }
+  }
+
+  public clearMemory(): void {
+    this.memory = null;
+  }
+
+  public toSquare(): void {
+    if (this.currentState === this.states.AfterEqual) {
+      const num = parseFloat(this.currentValue);
+      this.firstNumberStr = Math.pow(num, 2).toString();
+
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Number) {
+      const num = parseFloat(this.firstNumberStr);
+      this.firstNumberStr = Math.pow(num, 2).toString();
+
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Operation) {
+      const num = parseFloat(this.secondNumberStr);
+      this.secondNumberStr = Math.pow(num, 2).toString();
+
+      this.currentValue = `${this.firstNumberStr} ${this.currentOperation} ${this.secondNumberStr}`;
+
+      this.updateValue();
+    }
+  }
+
+  public sqrt(): void {
+    if (this.currentState === this.states.AfterEqual) {
+      const num = parseFloat(this.currentValue);
+      if (num < 0) {
+        return;
+      }
+      this.firstNumberStr = Math.sqrt(num).toString();
+
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Number) {
+      const num = parseFloat(this.firstNumberStr);
+      if (num < 0) {
+        return;
+      }
+      this.firstNumberStr = Math.sqrt(num).toString();
+
+      this.currentValue = this.firstNumberStr;
+
+      this.updateValue();
+    }
+
+    if (this.currentState === this.states.Operation) {
+      const num = parseFloat(this.secondNumberStr);
+      if (num < 0) {
+        return;
+      }
+      this.secondNumberStr = Math.sqrt(num).toString();
+
+      this.currentValue = `${this.firstNumberStr} ${this.currentOperation} ${this.secondNumberStr}`;
+
+      this.updateValue();
+    }
   }
 
   public pushNumber(value: number): void {

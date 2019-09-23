@@ -26,6 +26,10 @@
 
         <div class="calculator__actions-panel">
           <div class="button-row">
+            <button class="action in-memory" (click)="memoryAdd()">
+              <span>M+</span>
+            </button>
+
             <button class="action clear-last" (click)="clearLast()">
               <span>CE</span>
             </button>
@@ -44,6 +48,10 @@
           </div>
 
           <div class="button-row">
+            <button class="action clear-memory" (click)="clearMemory()">
+              <span>MC</span>
+            </button>
+
             <button class="action number" (click)="pushNumber(7)">
               <span>7</span>
             </button>
@@ -62,6 +70,10 @@
           </div>
 
           <div class="button-row">
+            <button class="action memory-remember" (click)="memoryRemember()">
+              <span>MR</span>
+            </button>
+
             <button class="action number" (click)="pushNumber(4)">
               <span>4</span>
             </button>
@@ -80,6 +92,10 @@
           </div>
 
           <div class="button-row">
+            <button class="action square" (click)="toSquare()">
+              <span>x2</span>
+            </button>
+
             <button class="action number" (click)="pushNumber(1)">
               <span>1</span>
             </button>
@@ -98,6 +114,10 @@
           </div>
 
           <div class="button-row">
+            <button class="action square" (click)="sqrt()">
+              <span>sqrt</span>
+            </button>
+
             <button class="action sign" (click)="toggleSign()">
               <span>+ / -</span>
             </button>

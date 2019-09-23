@@ -48,7 +48,15 @@ export class Task2Component implements OnInit {
     const width = this.parallelepipedVolumeForm.get('width').value;
     const height = this.parallelepipedVolumeForm.get('height').value;
 
-    resultControl.setValue(`${(length * width * height).toString()} см3`);
+    const volume: number = length * width * height;
+
+    if (length < 0 || width < 0 || height < 0) {
+      resultControl.setValue('Все числа должны быть >= 0.');
+
+      return;
+    }
+
+    resultControl.setValue(`${volume.toString()} см3`);
   }
 
   private initForms(): void {

@@ -22,7 +22,13 @@ export class Task6Component implements OnInit {
   public countStringLength(): void {
     const { value } = this.userInputControl;
 
-    this.resultControl.setValue(value.length);
+    const strEnding = [2, 3, 4].includes(value % 10)
+      ? 'вороны.'
+      : [5, 6, 7, 8, 9, 0].includes(value % 10)
+        ? 'ворон.'
+        : 'ворона.';
+
+    this.resultControl.setValue(`Летели по небу ${value.length} ${strEnding}`);
   }
 
   private initForms(): void {

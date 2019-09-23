@@ -18,7 +18,7 @@ const labs: Lab[] = [
     tasks: [
       ...getTasks(1, [1, 2, 3, 4, 5, 6, 7])
     ],
-    status: LabStatuses.Done
+    status: LabStatuses.Checked
   },
   {
     index: 2,
@@ -28,7 +28,7 @@ const labs: Lab[] = [
   {
     index: 3,
     tasks: [],
-    status: LabStatuses.Done
+    status: LabStatuses.Checked
   },
   {
     index: 4,
